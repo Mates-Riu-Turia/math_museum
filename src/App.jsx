@@ -23,7 +23,7 @@ function Nav({ t, changeLanguage }) {
         <nav className="navbar bg-body-tertiary">
             <div className="container-fluid">
                 <a className="navbar-brand" href="/">
-                    <img src="images/favicon_big.gif" alt="Logo" width="200" height="66" className="d-inline-block align-text-top me-1" />
+                    <img src="images/favicon_big.gif" alt="Logo" width="180" height="60" className="d-inline-block align-text-middle me-1" />
                     {t("title")}
                 </a>
                 <div className="dropdown me-4">
