@@ -17,6 +17,9 @@ i18n
   .init({
     fallbackLng: 'ca',
     debug: true,
+    backend: {
+      loadPath: '/math_museum/locales/{{lng}}/{{ns}}.json'
+    }
   });
 
 export default i18n;
