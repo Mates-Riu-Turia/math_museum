@@ -1,0 +1,29 @@
+{
+    "name": "Math Museum",
+    "short_name": "Math Museum",
+    "start_url": ".",
+    "display": "standalone",
+    "description": "A website with explanations about different math discoveries. It is integrated with our Math Timeline.",
+    "icons": [
+      {
+        "src": "images/favicon_small.gif",
+        "sizes": "828x578",
+        "type": "image/gif"
+      },
+      {
+        "src": "images/favicon_big.gif",
+        "sizes": "1790x578",
+        "type": "image/gif"
+      },
+      {
+        "src": "images/favicon_animation.gif",
+        "sizes": "1790x578",
+        "type": "image/gif"
+      },
+      {
+        "src": "images/favicon_org.ico",
+        "sizes": "200x144",
+        "type": "image/x-icon"
+      }
+    ]
+  }
