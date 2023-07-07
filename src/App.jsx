@@ -1,6 +1,7 @@
 import { React, useState } from "react";
 import { Dropdown, Container, Navbar } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
+import useTheme from "./hooks/useTheme";
 
 function Nav({ t, changeLanguage }) {
     return (
@@ -12,7 +13,8 @@ function Nav({ t, changeLanguage }) {
                 </Navbar.Brand>
                 <Navbar.Toggle />
                 <Navbar.Collapse>
-                    <LanguageSelector t={t} changeLanguage={changeLanguage}/>
+                    <LanguageSelector t={t} changeLanguage={changeLanguage} />
+                    <ThemeSelector t={t} />
                 </Navbar.Collapse>
             </Container>
         </Navbar>
@@ -29,9 +31,9 @@ function LanguageSelector({ t, changeLanguage }) {
 
     return (
         <Dropdown>
-            <Dropdown.Toggle variant="secondary" className="rounded-pill">
+            <Dropdown.Toggle variant="secondary" className="rounded-pill m-1">
                 <i className="bi bi-globe-americas"></i>
-                <span id="langSelector">{state}</span>
+                <span>{state}</span>
             </Dropdown.Toggle>
             <Dropdown.Menu>
                 <Dropdown.Item onClick={() => changeLanguageHelper("ca")}>Valencià/Català</Dropdown.Item>
@@ -42,14 +44,38 @@ function LanguageSelector({ t, changeLanguage }) {
     );
 }
 
-function Footer({t}) {
+function ThemeSelector({ t }) {
+    const [getTheme, setTheme] = useTheme();
+
+    return (
+        <Dropdown>
+            <Dropdown.Toggle variant="secondary" className="rounded-pill">
+                <i className={getTheme()[0]}></i>
+                <span>{getTheme()[1]}</span>
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+                <Dropdown.Item onClick={() => setTheme("light")}>
+                    <i className="bi bi-sun-fill">{t("themeSelector.light")}</i>
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => setTheme("dark")}>
+                    <i className="bi bi-moon-stars-fill">{t("themeSelector.dark")}</i>
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => setTheme("auto")}>
+                    <i className="bi bi-circle-half">{t("themeSelector.auto")}</i>
+                </Dropdown.Item>
+            </Dropdown.Menu>
+        </Dropdown>
+    );
+}
+
+function Footer({ t }) {
     return (
         <footer className="d-flex flex-wrap justify-content-between align-items-center py-3 border-top fixed-bottom bg-body-tertiary">
-          <p className="col-md-4 mb-1 ms-2 text-body-secondary">{t("orgName")}</p>
-    
-          <a href="/" className="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none me-3">
-            <img src="images/favicon_org.ico" alt="Logo" width="30" height="24" className="align-text-top" />
-          </a>
+            <p className="col-md-4 mb-1 ms-2 text-body-secondary">{t("orgName")}</p>
+
+            <a href="/" className="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none me-3">
+                <img src="images/favicon_org.ico" alt="Logo" width="30" height="24" className="align-text-top" />
+            </a>
         </footer>
     );
 }
