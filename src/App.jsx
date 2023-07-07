@@ -1,43 +1,38 @@
-import {React, useState} from "react";
+import { React, useState } from "react";
+import { Dropdown, Container, Navbar } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 
 function Nav({ t, changeLanguage }) {
     const [state, setState] = useState(" " + t("chooseLang"));
 
-    function changeLanguageCa() {
-        changeLanguage("ca");
-        setState(" CA");
-    }
-
-    function changeLanguageEs() {
-        changeLanguage("es");
-        setState(" ES");
-    }
-
-    function changeLanguageEn() {
-        changeLanguage("en");
-        setState(" EN")
+    const changeLanguageHelper = (lang) => {
+        changeLanguage(lang);
+        setState(" " + lang.toUpperCase());
     }
 
     return (
-        <nav className="navbar bg-body-tertiary">
-            <div className="container-fluid">
-                <a className="navbar-brand" href="/">
+        <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
+            <Container fluid>
+                <Navbar.Brand href="/">
                     <img src="images/favicon_big.gif" alt="Logo" width="180" height="60" className="d-inline-block align-text-middle me-1" />
                     {t("title")}
-                </a>
-                <div className="dropdown me-4">
-                    <button className="btn btn-secondary dropdown-toggle rounded-pill" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i className="bi bi-globe-americas"></i><span id="langSelector">{state}</span>
-                    </button>
-                    <ul className="dropdown-menu dropdown-menu-end">
-                        <li><button className="dropdown-item" type="button" onClick={changeLanguageCa}>Valencià/Català</button></li>
-                        <li><button className="dropdown-item" type="button" onClick={changeLanguageEs}>Castellano</button></li>
-                        <li><button className="dropdown-item" type="button" onClick={changeLanguageEn}>English</button></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+                </Navbar.Brand>
+                <Navbar.Toggle />
+                <Navbar.Collapse>
+                    <Dropdown>
+                        <Dropdown.Toggle variant="secondary" className="rounded-pill">
+                            <i className="bi bi-globe-americas"></i>
+                            <span id="langSelector">{state}</span>
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu>
+                            <Dropdown.Item onClick={() => changeLanguageHelper("ca")}>Valencià/Català</Dropdown.Item>
+                            <Dropdown.Item onClick={() => changeLanguageHelper("es")}>Castellano</Dropdown.Item>
+                            <Dropdown.Item onClick={() => changeLanguageHelper("en")}>English</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                </Navbar.Collapse>
+            </Container>
+        </Navbar>
     );
 }
 
