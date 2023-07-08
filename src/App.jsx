@@ -1,6 +1,6 @@
-import { React, useState } from "react";
+import { React } from "react";
 import { useTranslation } from "react-i18next";
-import { Nav, Footer } from "./basicUI";
+import { Nav, Footer } from "./components/basicUI";
 
 import { getData } from "./db";
 
