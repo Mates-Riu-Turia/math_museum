@@ -78,8 +78,8 @@ function ThemeSelector({ t }) {
 export function Logo({ t }) {
     return (
         <>
-            <img className="d-none d-lg-block img-fluid" src="/math_museum/images/favicon_animation_big.gif" />
-            <img className="d-block d-lg-none img-fluid" src="/math_museum/images/favicon_animation_small.gif" />
+            <img className="d-none d-lg-block img-fluid mx-auto" src="/math_museum/images/favicon_animation_big.gif" />
+            <img className="d-block d-lg-none img-fluid mx-auto" src="/math_museum/images/favicon_animation_small.gif" />
             <h2 className="text-center">{t("start")}</h2>
         </>
     );
