@@ -1,6 +1,6 @@
 import { React, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Nav, Footer } from "./components/basicUI";
+import { Nav, Footer, Logo } from "./components/basicUI";
 
 import { getData } from "./db";
 
@@ -26,6 +26,7 @@ export default function App() {
         <>
             <Nav t={t} changeLanguage={changeLanguage} setShowOffcanvas={openOffcanvas} />
             <Expositions show={showOffcanvas} handleClose={closeOffcanvas}/>
+            <Logo t={t} />
             <Footer t={t} />
         </>
     );

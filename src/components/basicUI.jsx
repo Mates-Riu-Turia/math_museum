@@ -60,7 +60,7 @@ function ThemeSelector({ t }) {
                 <i className={getTheme()[0]}></i>
                 <span>{t(getTheme()[1])}</span>
             </Dropdown.Toggle>
-            <Dropdown.Menu>
+            <Dropdown.Menu className="dropdown-menu-lg-end">
                 <Dropdown.Item onClick={() => setTheme("light")}>
                     <i className="bi bi-sun-fill">{t("themeSelector.light")}</i>
                 </Dropdown.Item>
@@ -72,6 +72,16 @@ function ThemeSelector({ t }) {
                 </Dropdown.Item>
             </Dropdown.Menu>
         </Dropdown>
+    );
+}
+
+export function Logo({ t }) {
+    return (
+        <>
+            <img className="d-none d-lg-block img-fluid" src="/math_museum/images/favicon_animation_big.gif" />
+            <img className="d-block d-lg-none img-fluid" src="/math_museum/images/favicon_animation_small.gif" />
+            <h2 className="text-center">Pulse "Ver exposiciones" y elija una para comenzar</h2>
+        </>
     );
 }
 
