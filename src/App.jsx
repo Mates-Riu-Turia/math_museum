@@ -10,7 +10,7 @@ export default function App() {
     const { t, i18n } = useTranslation();
 
     const [showOffcanvas, setShowOffcanvas] = useState(false);
-    const invertOffcanvas = () => {setShowOffcanvas(!showOffcanvas)};
+    const openOffcanvas = () => {setShowOffcanvas(true)};
     const closeOffcanvas = () => {setShowOffcanvas(false)};
 
     const changeLanguage = (lng) => {
@@ -24,7 +24,7 @@ export default function App() {
 
     return (
         <>
-            <Nav t={t} changeLanguage={changeLanguage} setShowOffcanvas={invertOffcanvas} />
+            <Nav t={t} changeLanguage={changeLanguage} setShowOffcanvas={openOffcanvas} />
             <Expositions show={showOffcanvas} handleClose={closeOffcanvas}/>
             <Footer t={t} />
         </>
