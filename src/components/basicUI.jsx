@@ -2,11 +2,11 @@ import { React, useState } from "react";
 import { Dropdown, Container, Navbar, Button } from "react-bootstrap";
 import useTheme from "../hooks/useTheme";
 
-export function Nav({ t, changeLanguage }) {
+export function Nav({ t, changeLanguage, setShowOffcanvas }) {
     return (
         <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
             <Container fluid>
-                <Button variant="primary" className="d-lg-none d-xl-none d-xxl-none" onClick={() => alert("hola")}>
+                <Button variant="primary" className="d-lg-none d-xl-none d-xxl-none" onClick={setShowOffcanvas}>
                     <i className="bi bi-binoculars-fill"></i> {t("expositionsOffcanvas.button")}
                 </Button>
 
@@ -14,7 +14,7 @@ export function Nav({ t, changeLanguage }) {
                     <img src="/math_museum/images/favicon_big.gif" alt="Logo" width="180" height="60" className="d-inline-block align-text-middle" />
                     <span className="d-none" id="navTitle">{t("titleLong")}</span>
                 </Navbar.Brand>
-                <Button variant="primary" className="d-none d-lg-block" onClick={() => alert("hola")}>
+                <Button variant="primary" className="d-none d-lg-block" onClick={setShowOffcanvas}>
                     <i className="bi bi-binoculars-fill"></i> {t("expositionsOffcanvas.button")}
                 </Button>
 
