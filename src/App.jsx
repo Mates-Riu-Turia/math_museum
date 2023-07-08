@@ -1,6 +1,8 @@
-import { React } from "react";
+import { React, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Nav, Footer } from "./basicUI";
+
+import { getData } from "./db";
 
 export default function App() {
     const { t, i18n } = useTranslation();
@@ -8,6 +10,8 @@ export default function App() {
     const changeLanguage = (lng) => {
         i18n.changeLanguage(lng);
     };
+
+    getData();
 
     // Set the Web Page Title
     document.title = t("title");
