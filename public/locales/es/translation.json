@@ -7,5 +7,6 @@
         "light": " Claro",
         "dark": " Oscuro",
         "auto": " Automático"
-    }
+    },
+    "start": "Pulse \"Ver exposiciones\" y elija una para comenzar"
 }

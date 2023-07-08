@@ -80,7 +80,7 @@ export function Logo({ t }) {
         <>
             <img className="d-none d-lg-block img-fluid" src="/math_museum/images/favicon_animation_big.gif" />
             <img className="d-block d-lg-none img-fluid" src="/math_museum/images/favicon_animation_small.gif" />
-            <h2 className="text-center">Pulse "Ver exposiciones" y elija una para comenzar</h2>
+            <h2 className="text-center">{t("start")}</h2>
         </>
     );
 }
