@@ -6,7 +6,7 @@ export function Nav({ t, changeLanguage }) {
     return (
         <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
             <Container fluid>
-                <Navbar.Brand href="/">
+                <Navbar.Brand href="/math_timeline/">
                     <img src="/math_museum/images/favicon_big.gif" alt="Logo" width="180" height="60" className="d-inline-block align-text-middle me-1" />
                     {t("title")}
                 </Navbar.Brand>
