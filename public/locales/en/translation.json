@@ -7,5 +7,6 @@
         "light": " Light",
         "dark": " Dark",
         "auto": " Auto"
-    }
+    },
+    "start": "Click \"See expositions\" and choose one to starts"
 }
