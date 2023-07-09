@@ -12,5 +12,14 @@
     "expositionsOffcanvas": {
         "button": "See expositions",
         "title": "Available expositions"
+    },
+    "exposition": {
+        "description": "Description",
+        "history": "History",
+        "previous_knowledge": "Previous knowledge",
+        "applications": "Applications",
+        "visual_workshop": "Visual workshop",
+        "math_workshop": "Reasoning workshop",
+        "curiosities": "Curiosities"
     }
 }

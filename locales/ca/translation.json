@@ -12,5 +12,14 @@
     "expositionsOffcanvas": {
         "button": "Veure exposicions",
         "title": "Exposicions disponibles"
+    },
+    "exposition": {
+        "description": "Descripció",
+        "history": "Historia",
+        "previous_knowledge": "Coneixements anteriors",
+        "applications": "Aplicacions",
+        "visual_workshop": "Taller Visual",
+        "math_workshop": "Taller de Raonament",
+        "curiosities": "Curiositats"
     }
 }
