@@ -10,7 +10,7 @@ export function Nav({ t, changeLanguage, setShowOffcanvas }) {
                     <i className="bi bi-binoculars-fill"></i> {t("expositionsOffcanvas.button")}
                 </Button>
 
-                <Navbar.Brand href="/math_timeline/">
+                <Navbar.Brand href="/math_museum/">
                     <img src="/math_museum/images/favicon_big.gif" alt="Logo" width="180" height="60" className="d-inline-block align-text-middle" />
                     <span className="d-none" id="navTitle">{t("titleLong")}</span>
                 </Navbar.Brand>

@@ -1,29 +1,7 @@
 import { useState, useEffect } from "react";
 import { Offcanvas, Nav } from "react-bootstrap";
 
-import { getExpositions } from "../db";
-
-export function Expositions({ show, handleClose, t, i18n }) {
-  const [lang, setLang] = useState(i18n.language);
-  const [expositions, setExpositions] = useState(null);
-
-  if (lang != i18n.language) {
-    setLang(i18n.language);
-  }
-
-  useEffect(() => {
-    const expositionsSync = async () => {
-      const expos = await getExpositions(lang.split('-')[0]);
-      setExpositions(expos);
-    };
-    expositionsSync();
-  }, [lang]);
-
-
-  if (expositions === null) {
-    return (<></>);
-  }
-
+export function Expositions({ show, handleClose, t, expositions }) {
   return (
     <Offcanvas show={show} onHide={handleClose}>
       <Offcanvas.Header closeButton>
@@ -34,7 +12,7 @@ export function Expositions({ show, handleClose, t, i18n }) {
           {expositions.map((exposition) => {
             return (
               <>
-                <Nav.Link href={exposition.name} key={exposition._id}>
+                <Nav.Link href={"math_museum/expositions/" + exposition.name} key={exposition._id}>
                   <i className="bi bi-link"> </i>
                   {exposition.title}
                 </Nav.Link>
