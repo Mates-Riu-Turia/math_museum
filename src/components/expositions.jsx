@@ -34,7 +34,12 @@ export function Expositions({ show, handleClose, t, i18n }) {
           <Container>
             <Nav className="me-auto">
               {expositions.map((exposition) => {
-                return (<Nav.Link href={exposition.name} key={exposition._id}>{exposition.title}</Nav.Link>);
+                return (
+                  <Nav.Link href={exposition.name} key={exposition._id}>
+                    <i className="bi bi-link"> </i>
+                    {exposition.title}
+                  </Nav.Link>
+                );
               })}
             </Nav>
           </Container>
