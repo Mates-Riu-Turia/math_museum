@@ -30,20 +30,18 @@ export function Expositions({ show, handleClose, t, i18n }) {
         <Offcanvas.Title>{t("expositionsOffcanvas.title")}</Offcanvas.Title>
       </Offcanvas.Header>
       <Offcanvas.Body>
-        <Navbar>
-          <Container>
-            <Nav className="me-auto">
-              {expositions.map((exposition) => {
-                return (
-                  <Nav.Link href={exposition.name} key={exposition._id}>
-                    <i className="bi bi-link"> </i>
-                    {exposition.title}
-                  </Nav.Link>
-                );
-              })}
-            </Nav>
-          </Container>
-        </Navbar>
+        <Nav className="justify-content-start flex-grow-1 pe-3">
+          {expositions.map((exposition) => {
+            return (
+              <>
+                <Nav.Link href={exposition.name} key={exposition._id}>
+                  <i className="bi bi-link"> </i>
+                  {exposition.title}
+                </Nav.Link>
+              </>
+            );
+          })}
+        </Nav>
       </Offcanvas.Body>
     </Offcanvas>
   );
