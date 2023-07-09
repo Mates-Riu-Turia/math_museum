@@ -8,5 +8,9 @@
         "dark": " Fosc",
         "auto": " Automàtic"
     },
-    "start": "Prema \"Veure exposicions\" i trie una per a començar"
+    "start": "Prema \"Veure exposicions\" i trie una per a començar",
+    "expositionsOffcanvas": {
+        "button": "Veure exposicions",
+        "title": "Exposicions disponibles"
+    }
 }
