@@ -8,7 +8,7 @@ import { Nav, Footer, Logo } from "./components/basicUI";
 
 import { Expositions } from "./components/expositions"
 import { Exposition } from "./components/exposition";
-import { NotFound } from "./components/NotFound";
+import { NotFound } from "./components/notFound";
 
 export default function App() {
     const { t, i18n } = useTranslation();

@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { Tabs, Tab, ListGroup } from "react-bootstrap";
-import { NotFound } from "./NotFound"
+import { NotFound } from "./notFound"
 
 export function Exposition({ expositions, t }) {
     const { name } = useParams();
