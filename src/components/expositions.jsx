@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Offcanvas, Navbar, Container, Nav } from "react-bootstrap";
+import { Offcanvas, Nav } from "react-bootstrap";
 
 import { getExpositions } from "../db";
 
