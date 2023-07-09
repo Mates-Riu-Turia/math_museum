@@ -1,11 +1,13 @@
 export function NotFound({ t }) {
     return (
-        <div className="d-flex align-items-center justify-content-center position-absolute top-50 end-50 start-50 translate-middle">
-            <div className="text-center">
-                <p className="fs-3">
-                    <span className="text-danger">{t("notFound.onomatopoeia")}</span>{t("notFound.error")}
-                </p>
+        <>
+            <div className="text-center position-absolute bottom-0 start-0 end-0 transalte-middle" style={{top: "35%"}}>
                 <h1 className="display-1 fw-bold">404</h1>
+                <p className="fs-3">
+                    <span className="text-danger">{t("notFound.onomatopoeia")}</span>
+                    <br />
+                    <span>{t("notFound.error")}</span>
+                </p>
                 <p className="lead">
                     {t("notFound.description")}
                 </p>
@@ -14,6 +16,6 @@ export function NotFound({ t }) {
                     <i className="bi bi-house-fill ms-1"></i>
                 </a>
             </div>
-        </div>
+        </>
     );
 }   
