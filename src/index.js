@@ -5,13 +5,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./i18n";
 
-import { loginAnonymous } from "./db";
+import { loginAnonymous, app } from "./db";
 import App from "./App";
 
-// Log as anon-user in MongoDB Atlas
-loginAnonymous();
-
 const root = createRoot(document.getElementById("root"));
+
+if (!app.currentUser) {
+  const anonUser = await loginAnonymous();
+}
+
 root.render(
   <StrictMode>
     <App />

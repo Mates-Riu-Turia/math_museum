@@ -3,7 +3,7 @@ import { Offcanvas, Navbar, Container, Nav } from "react-bootstrap";
 
 import { getExpositions } from "../db";
 
-export function Expositions({ show, handleClose, t, i18n, user }) {
+export function Expositions({ show, handleClose, t, i18n }) {
   const [lang, setLang] = useState(i18n.language);
   const [expositions, setExpositions] = useState(null);
 
@@ -13,10 +13,9 @@ export function Expositions({ show, handleClose, t, i18n, user }) {
 
   useEffect(() => {
     const expositionsSync = async () => {
-      const expos = await getExpositions(lang.split('-')[0], user);
+      const expos = await getExpositions(lang.split('-')[0]);
       setExpositions(expos);
     };
-
     expositionsSync();
   }, [lang]);
 
