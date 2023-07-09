@@ -21,5 +21,11 @@
         "visual_workshop": "Taller Visual",
         "math_workshop": "Taller de Raonament",
         "curiosities": "Curiositats"
+    },
+    "notFound": {
+        "onomatopoeia": "Ups!",
+        "error": "Pàgina no trobada.",
+        "description": "La pàgina que cerques no existeix o ha sigut moguda.",
+        "home": "Anar a inici"
     }
 }
