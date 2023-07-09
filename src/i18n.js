@@ -15,8 +15,8 @@ i18n
   // init i18next
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
-    fallbackLng: 'ca',
-    debug: true,
+    fallbackLng: 'en',
+    debug: false,
     backend: {
       loadPath: '/math_museum/locales/{{lng}}/{{ns}}.json'
     }
