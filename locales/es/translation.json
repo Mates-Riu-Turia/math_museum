@@ -1,10 +1,16 @@
 {
     "title": "Museo de las Mates",
+    "titleLong": "Museo de las Matemáticas",
     "chooseLang": "Elige un idioma",
     "orgName": "© 2023 Dpto. de Matemáticas del IES Riu Túria",
     "themeSelector": {
         "light": " Claro",
         "dark": " Oscuro",
         "auto": " Automático"
+    },
+    "start": "Pulse \"Ver exposiciones\" y elija una para comenzar",
+    "expositionsOffcanvas": {
+        "button": "Ver exposiciones",
+        "title": "Exposiciones disponibles"
     }
 }
