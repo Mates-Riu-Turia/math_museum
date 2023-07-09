@@ -4,15 +4,18 @@ const id = "mamu-ehyjq";
 const config = {
     id
 };
-const app = new Realm.App(config);
+export const app = new Realm.App(config);
 
 export const loginAnonymous = async () => {
-    await app.logIn(Realm.Credentials.anonymous());
+    if (app.currentUser === null) {
+        await app.logIn(Realm.Credentials.anonymous());
+        console.log("running")
+    }
 };
 
-export const getData = async (user) => {
-    const mongo = app.currentUser.mongoClient("mongodb-atlas");
-    const expositions = mongo.db("Mamu").collection("expositions");
-    const data = await expositions.findOne({title: "Pitagoras"});
-    console.log(data)
+export const getExpositions = async (lang, user) => {
+    const mongo = user.mongoClient("mongodb-atlas");
+    const expositions = mongo.db("Mamu").collection("expositions_" + lang);
+    const data = await expositions.find({});
+    return data;
 };

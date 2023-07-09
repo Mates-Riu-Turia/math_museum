@@ -1,16 +1,45 @@
-import { useState } from "react";
-import { Offcanvas } from "react-bootstrap";
+import { useState, useEffect } from "react";
+import { Offcanvas, Navbar, Container, Nav } from "react-bootstrap";
 
-export function Expositions({ show, handleClose }) {
+import { getExpositions } from "../db";
+
+export function Expositions({ show, handleClose, t, i18n, user }) {
+  const [lang, setLang] = useState(i18n.language);
+  const [expositions, setExpositions] = useState(null);
+
+  if (lang != i18n.language) {
+    setLang(i18n.language);
+  }
+
+  useEffect(() => {
+    const expositionsSync = async () => {
+      const expos = await getExpositions(lang.split('-')[0], user);
+      setExpositions(expos);
+    };
+
+    expositionsSync();
+  }, [lang]);
+
+
+  if (expositions === null) {
+    return (<></>);
+  }
+
   return (
     <Offcanvas show={show} onHide={handleClose}>
       <Offcanvas.Header closeButton>
         <Offcanvas.Title>Responsive offcanvas</Offcanvas.Title>
       </Offcanvas.Header>
       <Offcanvas.Body>
-        <p className="mb-0">
-          This is content within an <code>.offcanvas-lg</code>.
-        </p>
+        <Navbar>
+          <Container>
+            <Nav className="me-auto">
+              {expositions.map((exposition) => {
+                return (<Nav.Link href={exposition.name}>{exposition.title}</Nav.Link>);
+              })}
+            </Nav>
+          </Container>
+        </Navbar>
       </Offcanvas.Body>
     </Offcanvas>
   );
