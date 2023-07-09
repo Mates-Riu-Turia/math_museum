@@ -8,5 +8,9 @@
         "dark": " Oscuro",
         "auto": " Automático"
     },
-    "start": "Pulse \"Ver exposiciones\" y elija una para comenzar"
+    "start": "Pulse \"Ver exposiciones\" y elija una para comenzar",
+    "expositionsOffcanvas": {
+        "button": "Ver exposiciones",
+        "title": "Exposiciones disponibles"
+    }
 }

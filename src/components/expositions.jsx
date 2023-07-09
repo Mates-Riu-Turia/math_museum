@@ -27,7 +27,7 @@ export function Expositions({ show, handleClose, t, i18n }) {
   return (
     <Offcanvas show={show} onHide={handleClose}>
       <Offcanvas.Header closeButton>
-        <Offcanvas.Title>Responsive offcanvas</Offcanvas.Title>
+        <Offcanvas.Title>{t("expositionsOffcanvas.title")}</Offcanvas.Title>
       </Offcanvas.Header>
       <Offcanvas.Body>
         <Navbar>
