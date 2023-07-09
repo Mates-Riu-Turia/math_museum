@@ -12,7 +12,7 @@ export function Expositions({ show, handleClose, t, expositions }) {
           {expositions.map((exposition) => {
             return (
               <>
-                <Nav.Link href={"math_museum/expositions/" + exposition.name} key={exposition._id}>
+                <Nav.Link href={"/math_museum/expositions/" + exposition.name} key={exposition._id}>
                   <i className="bi bi-link"> </i>
                   {exposition.title}
                 </Nav.Link>
