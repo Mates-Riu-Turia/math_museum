@@ -8,5 +8,9 @@
         "dark": " Dark",
         "auto": " Auto"
     },
-    "start": "Click \"See expositions\" and choose one to start"
+    "start": "Click \"See expositions\" and choose one to start",
+    "expositionsOffcanvas": {
+        "button": "See expositions",
+        "title": "Available expositions"
+    }
 }
