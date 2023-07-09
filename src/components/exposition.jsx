@@ -1,10 +1,17 @@
 import { useParams } from "react-router-dom";
 import { Tabs, Tab, ListGroup } from "react-bootstrap";
+import { NotFound } from "./NotFound"
 
 export function Exposition({ expositions, t }) {
     const { name } = useParams();
 
     const exposition = expositions.find(exposition => exposition.name == name);
+
+    if (exposition === undefined) {
+        return (
+            <NotFound t={t}/>
+        );
+    }
 
     return (
         <>

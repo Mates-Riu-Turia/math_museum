@@ -8,6 +8,7 @@ import { Nav, Footer, Logo } from "./components/basicUI";
 
 import { Expositions } from "./components/expositions"
 import { Exposition } from "./components/exposition";
+import { NotFound } from "./components/NotFound";
 
 export default function App() {
     const { t, i18n } = useTranslation();
@@ -51,6 +52,7 @@ export default function App() {
             <Routes>
                 <Route path="/math_museum" element={<Logo t={t} />} />
                 <Route path="/math_museum/expositions/:name" element={<Exposition expositions={expositions} t={t} />} />
+                <Route path="*" element={<NotFound t={t} />} />
             </Routes>
             <Footer t={t} />
         </Router>
