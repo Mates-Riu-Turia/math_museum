@@ -77,11 +77,11 @@ function ThemeSelector({ t }) {
 
 export function Logo({ t }) {
     return (
-        <>
+        <div className="position-absolute bottom-0 start-0 end-0 transalte-middle" id="logoContainer">
             <img className="d-none d-lg-block img-fluid mx-auto" src="/math_museum/images/favicon_animation_big.gif" />
             <img className="d-block d-lg-none img-fluid mx-auto" src="/math_museum/images/favicon_animation_small.gif" />
             <h2 className="text-center">{t("start")}</h2>
-        </>
+        </div>
     );
 }
 

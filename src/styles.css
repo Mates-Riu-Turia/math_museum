@@ -2,4 +2,18 @@
     #navTitle {
         display: inline !important;
     }
+
+    #logoContainer {
+        top: 15% !important;
+    }
+}
+
+@media (max-width: 991px) {
+    #logoContainer {
+        top: 40% !important;
+    }
+}
+
+#notFoundContainer {
+    top: 35% !important;
 }

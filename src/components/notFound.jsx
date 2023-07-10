@@ -1,7 +1,7 @@
 export function NotFound({ t }) {
     return (
         <>
-            <div className="text-center position-absolute bottom-0 start-0 end-0 transalte-middle" style={{top: "35%"}}>
+            <div className="text-center position-absolute bottom-0 start-0 end-0 transalte-middle" id="notFoundContainer">
                 <h1 className="display-1 fw-bold">404</h1>
                 <p className="fs-3">
                     <span className="text-danger">{t("notFound.onomatopoeia")}</span>
