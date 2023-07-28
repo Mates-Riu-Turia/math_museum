@@ -9,7 +9,7 @@ export function Exposition({ expositions, t }) {
 
     if (exposition === undefined) {
         return (
-            <NotFound t={t}/>
+            <NotFound t={t} />
         );
     }
 
@@ -20,38 +20,38 @@ export function Exposition({ expositions, t }) {
                 defaultActiveKey="description"
                 className="mt-3"
             >
-                <Tab className="text-center mt-2" eventKey="description" title={t("exposition.description")}>
-                    {exposition.description}
+                <Tab className="text-center mt-2" eventKey="description" title={t("exposition.description")}
+                    dangerouslySetInnerHTML={{ __html: exposition.description }}>
                 </Tab>
-                <Tab className="text-center mt-2" eventKey="history" title={t("exposition.history")}>
-                    {exposition.history}
+                <Tab className="text-center mt-2" eventKey="history" title={t("exposition.history")}
+                    dangerouslySetInnerHTML={{ __html: exposition.history }}>
                 </Tab>
-                <Tab className="text-center mt-2" eventKey="previous_knowledge" title={t("exposition.previous_knowledge")}>
-                    {exposition.previous_knowledge}
+                <Tab className="text-center mt-2" eventKey="previous_knowledge" title={t("exposition.previous_knowledge")}
+                    dangerouslySetInnerHTML={{ __html: exposition.knowledge }}>
                 </Tab>
                 <Tab className="text-center mt-2" eventKey="applications" title={t("exposition.applications")}>
                     <ListGroup>
                         {exposition.applications.map(application => {
                             return (
-                                <ListGroup.Item key={self.crypto.randomUUID()}>
-                                    {application}
+                                <ListGroup.Item key={self.crypto.randomUUID()}
+                                    dangerouslySetInnerHTML={{ __html: application }}>
                                 </ListGroup.Item>
                             );
                         })}
                     </ListGroup>
                 </Tab>
-                <Tab className="text-center mt-2" eventKey="visual_workshop" title={t("exposition.visual_workshop")}>
-                    {exposition.visual_workshop}
+                <Tab className="text-center mt-2" eventKey="visual_workshop" title={t("exposition.visual_workshop")}
+                    dangerouslySetInnerHTML={{ __html: exposition.visual_workshop }}>
                 </Tab>
-                <Tab className="text-center mt-2" eventKey="math_workshop" title={t("exposition.math_workshop")}>
-                    {exposition.math_workshop}
+                <Tab className="text-center mt-2" eventKey="math_workshop" title={t("exposition.math_workshop")}
+                    dangerouslySetInnerHTML={{ __html: exposition.math_workshop }}>
                 </Tab>
                 <Tab className="text-center mt-2" eventKey="curiosities" title={t("exposition.curiosities")}>
                     <ListGroup>
                         {exposition.curiosities.map(curiosity => {
                             return (
-                                <ListGroup.Item key={self.crypto.randomUUID()}>
-                                    {curiosity}
+                                <ListGroup.Item key={self.crypto.randomUUID()}
+                                    dangerouslySetInnerHTML={{ __html: curiosity }}>
                                 </ListGroup.Item>
                             );
                         })}
