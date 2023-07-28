@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/math_museum/static/css/main.7fbf058a.css",
-    "main.js": "/math_museum/static/js/main.1affcc31.js",
+    "main.js": "/math_museum/static/js/main.1cd26ec7.js",
     "static/media/bootstrap-icons.woff?": "/math_museum/static/media/bootstrap-icons.4753c5ba57962b4d7bf8.woff",
     "static/media/bootstrap-icons.woff2?": "/math_museum/static/media/bootstrap-icons.6d63d0501e5ed7b79dab.woff2",
     "index.html": "/math_museum/index.html",
     "static/media/getFetch.cjs": "/math_museum/static/media/getFetch.40f37ddea2378391108f.cjs",
     "main.7fbf058a.css.map": "/math_museum/static/css/main.7fbf058a.css.map",
-    "main.1affcc31.js.map": "/math_museum/static/js/main.1affcc31.js.map"
+    "main.1cd26ec7.js.map": "/math_museum/static/js/main.1cd26ec7.js.map"
   },
   "entrypoints": [
     "static/css/main.7fbf058a.css",
-    "static/js/main.1affcc31.js"
+    "static/js/main.1cd26ec7.js"
   ]
 }
