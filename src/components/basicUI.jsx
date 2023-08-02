@@ -2,9 +2,11 @@ import { React, useState } from "react";
 import { Dropdown, Container, Navbar, Button } from "react-bootstrap";
 import useTheme from "../hooks/useTheme";
 
+import { AccountSelector } from "./account";
+
 export function Nav({ t, changeLanguage, setShowOffcanvas }) {
     return (
-        <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
+        <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary z-3">
             <Container fluid>
                 <Button variant="primary" className="d-lg-none d-xl-none d-xxl-none" onClick={setShowOffcanvas}>
                     <i className="bi bi-binoculars-fill"></i> {t("expositionsOffcanvas.button")}
@@ -22,6 +24,7 @@ export function Nav({ t, changeLanguage, setShowOffcanvas }) {
                 <Navbar.Collapse>
                     <LanguageSelector t={t} changeLanguage={changeLanguage} />
                     <ThemeSelector t={t} />
+                    <AccountSelector t={t} />
                 </Navbar.Collapse>
             </Container>
         </Navbar>
@@ -56,7 +59,7 @@ function ThemeSelector({ t }) {
 
     return (
         <Dropdown>
-            <Dropdown.Toggle variant="secondary" className="rounded-pill">
+            <Dropdown.Toggle variant="secondary" className="rounded-pill m-1">
                 <i className={getTheme()[0]}></i>
                 <span>{t(getTheme()[1])}</span>
             </Dropdown.Toggle>
