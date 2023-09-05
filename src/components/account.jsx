@@ -26,7 +26,7 @@ export function AccountSelector({ t }) {
     return (
         <Dropdown>
             <Dropdown.Toggle variant="outline-primary" className="rounded-pill" id="dropdown-basic">
-                <i className="bi bi-person"></i>{app_login.currentUser.customData.name}
+                <i className="bi bi-person"></i>{app_login.currentUser.customData.name + " " + app_login.currentUser.customData.surname}
             </Dropdown.Toggle>
 
             <Dropdown.Menu className="dropdown-menu-lg-end">
