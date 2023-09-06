@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Form, Alert, Button, Row, Col, FloatingLabel, Container, Modal } from "react-bootstrap";
 import { isTeacher } from "../db";
+import { TabEditor } from "./textEditor"
 
 export function AddExposition({ t }) {
     if (isTeacher()) {
@@ -16,7 +17,7 @@ export function AddExposition({ t }) {
 
         return (
             <div className="position-absolute top-50 start-50 translate-middle text-center w-100">
-                <AddContent t={t} show={showModal}  setShow={setShowModal}/>
+                <AddContent t={t} show={showModal} setShow={setShowModal} />
 
                 <h1>{t("addExposition.title")}</h1>
 
@@ -107,7 +108,7 @@ function AddContent({ t, show, setShow }) {
                 <Modal.Title>{t("addExposition.title")}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-
+                <TabEditor t={t} />
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="primary" onClick={() => setShow(false)}>
