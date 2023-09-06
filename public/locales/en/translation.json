@@ -36,6 +36,12 @@
         "logout": "Log out"
     },
     "addExposition": {
-        "title": "Add a new exposition"
+        "title": "Add a new exposition",
+        "help": " Enter the unique identifier to be used in the URL, then write the titles in each language. Finally, enter the internationalized content using the respective button.",
+        "urlName": "Identifier for the URL",
+        "titleES": "Title in Spanish",
+        "titleCAT": "Title in Valencià/Català",
+        "titleEN": "Title in English",
+        "btn": "Add content"
     }
 }
