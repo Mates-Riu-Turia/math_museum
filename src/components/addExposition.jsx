@@ -77,7 +77,17 @@ export function AddExposition({ t }) {
                         </Row>
                         <Row>
                             <Col>
-                                <Button variant="outline-primary" className="w-100" onClick={() => setShowModal(true)}>{t("addExposition.btn")}</Button>
+                                <Button variant="outline-primary" className="w-100 mb-2" onClick={() => setShowModal(true)}>{t("addExposition.btn") + " (Castellano)"}</Button>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <Button variant="outline-primary" className="w-100 mb-2" onClick={() => setShowModal(true)}>{t("addExposition.btn") + " (Valencià/Català)"}</Button>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <Button variant="outline-primary" className="w-100 mb-2" onClick={() => setShowModal(true)}>{t("addExposition.btn") + " (English)"}</Button>
                             </Col>
                         </Row>
                     </Container>
