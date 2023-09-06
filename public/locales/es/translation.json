@@ -36,6 +36,12 @@
         "logout": "Cerrar sesión" 
     },
     "addExposition": {
-        "title": "Añadir una nueva exposición"
+        "title": "Añadir una nueva exposición",
+        "help": " Introduzca el identificador único que se usará en la URL, después escriba los títulos en cada idioma. Finalmente introduzca el contenido internacionalizado utilizando el respectivo botón.",
+        "urlName": "Identificador para la URL",
+        "titleES": "Título en Castellano",
+        "titleCAT": "Título en Valencià/Català",
+        "titleEN": "Título en English",
+        "btn": "Añadir contenido"
     }
 }
