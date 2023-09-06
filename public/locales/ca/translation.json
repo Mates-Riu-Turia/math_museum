@@ -34,5 +34,8 @@
         "register": "Registrar-se",
         "manage": "Gestionar compte",
         "logout": "Tancar sessió"
+    },
+    "addExposition": {
+        "title": "Afegir una nova exposició"
     }
 }
