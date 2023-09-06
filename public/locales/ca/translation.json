@@ -36,6 +36,12 @@
         "logout": "Tancar sessió"
     },
     "addExposition": {
-        "title": "Afegir una nova exposició"
+        "title": "Afegir una nova exposició",
+        "help": " Introduïsca l'identificador únic que s'usarà en la URL, després escriga els títols en cada idioma. Finalment introduïsca el contingut internacionalitzat utilitzant el respectiu botó.",
+        "urlName": "Identificador per a la URL",
+        "titleES": "Títol en Castellano",
+        "titleCAT": "Títol en Valencià/Català",
+        "titleEN": "Títol en English",
+        "btn": "Afegir contingut"
     }
 }
