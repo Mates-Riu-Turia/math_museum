@@ -8,6 +8,7 @@ import { Nav, Footer, Logo } from "./components/basicUI";
 
 import { Expositions } from "./components/expositions"
 import { Exposition } from "./components/exposition";
+import { AddExposition } from "./components/addExposition";
 import { NotFound } from "./components/notFound";
 
 export default function App() {
@@ -48,10 +49,11 @@ export default function App() {
     return (
         <Router>
             <Nav t={t} changeLanguage={changeLanguage} setShowOffcanvas={openOffcanvas} />
-            <Expositions show={showOffcanvas} handleClose={closeOffcanvas} i18n={i18n} t={t} expositions={expositions}/>
+            <Expositions show={showOffcanvas} handleClose={closeOffcanvas} i18n={i18n} t={t} expositions={expositions} />
             <Routes>
                 <Route path="/math_museum" element={<Logo t={t} />} />
                 <Route path="/math_museum/expositions/:name" element={<Exposition expositions={expositions} t={t} />} />
+                <Route path="/math_museum/add_exposition" element={<AddExposition t={t} />} />
                 <Route path="*" element={<NotFound t={t} />} />
             </Routes>
             <Footer t={t} />

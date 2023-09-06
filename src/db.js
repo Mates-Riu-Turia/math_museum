@@ -24,3 +24,12 @@ export const getExpositions = async (lang) => {
     const data = await expositions.find({});
     return data;
 };
+
+export const isTeacher = async () => {
+    try {
+        return await app_login.currentUser.functions.isTeacher();
+    }
+    catch (error) {
+        throw new Error(`Failed to get teacher info due to: ${error}`);
+    }
+};

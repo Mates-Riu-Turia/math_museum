@@ -1,8 +1,9 @@
 import { React, useState } from "react";
-import { Dropdown, Container, Navbar, Button } from "react-bootstrap";
+import { Dropdown, Container, Navbar, Button, Nav as NavB } from "react-bootstrap";
 import useTheme from "../hooks/useTheme";
 
 import { AccountSelector } from "./account";
+import { isTeacher } from "../db";
 
 export function Nav({ t, changeLanguage, setShowOffcanvas }) {
     return (
@@ -22,6 +23,12 @@ export function Nav({ t, changeLanguage, setShowOffcanvas }) {
 
                 <Navbar.Toggle />
                 <Navbar.Collapse>
+                    {
+                        isTeacher() && <NavB.Link href="/math_museum/add_exposition" className="ms-2">
+                            <i className="bi bi-plus-circle me-1"></i>
+                            {t("addExposition.link")}
+                        </NavB.Link>
+                    }
                     <LanguageSelector t={t} changeLanguage={changeLanguage} />
                     <ThemeSelector t={t} />
                     <AccountSelector t={t} />
