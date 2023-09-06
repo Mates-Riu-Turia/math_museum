@@ -34,5 +34,8 @@
         "register": "Sign up",
         "manage": "Manage account",
         "logout": "Log out"
+    },
+    "addExposition": {
+        "title": "Add a new exposition"
     }
 }
