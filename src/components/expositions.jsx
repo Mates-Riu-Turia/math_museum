@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { Offcanvas, Nav } from "react-bootstrap";
 
 export function Expositions({ show, handleClose, t, expositions }) {
@@ -11,12 +10,12 @@ export function Expositions({ show, handleClose, t, expositions }) {
         <Nav className="justify-content-start flex-grow-1 pe-3">
           {expositions.map((exposition) => {
             return (
-              <>
-                <Nav.Link href={"/math_museum/expositions/" + exposition.name} key={exposition._id}>
+              <li key={exposition._id}>
+                <Nav.Link href={"/math_museum/expositions/" + exposition.name}>
                   <i className="bi bi-link"> </i>
                   {exposition.title}
                 </Nav.Link>
-              </>
+              </li>
             );
           })}
         </Nav>
