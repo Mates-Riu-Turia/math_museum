@@ -26,7 +26,7 @@ export function Nav({ t, changeLanguage, setShowOffcanvas }) {
                     {
                         isTeacher() && <NavB.Link href="/math_museum/add_exposition" className="ms-2">
                             <i className="bi bi-plus-circle me-1"></i>
-                            {t("addExposition.link")}
+                            {t("addExposition.title")}
                         </NavB.Link>
                     }
                     <LanguageSelector t={t} changeLanguage={changeLanguage} />
