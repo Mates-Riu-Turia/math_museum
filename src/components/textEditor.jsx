@@ -1,45 +1,71 @@
-import { Tabs, Tab } from "react-bootstrap";
+import { useEffect, useState } from 'react';
+import { LexicalComposer } from '@lexical/react/LexicalComposer';
+import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
+import { ContentEditable } from '@lexical/react/LexicalContentEditable';
+import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
+import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 
-export function TabEditor({ t }) {
-    return (
-        <Tabs
-            defaultActiveKey="description"
-            className="mt-3"
-        >
-            <Tab className="text-center m-5" eventKey="description" title={t("exposition.description")}>
-                <TextEditor t={t} />
-            </Tab>
-
-            <Tab className="text-center m-5" eventKey="history" title={t("exposition.history")}>
-
-            </Tab>
-
-            <Tab className="text-center m-5" eventKey="previous_knowledge" title={t("exposition.previous_knowledge")}>
-
-            </Tab>
-
-            <Tab className="text-center m-5" eventKey="applications" title={t("exposition.applications")}>
-
-            </Tab>
-
-            <Tab className="text-center m-5" eventKey="visual_workshop" title={t("exposition.visual_workshop")}>
-
-            </Tab>
-
-            <Tab className="text-center m-5" eventKey="math_workshop" title={t("exposition.math_workshop")}>
-
-            </Tab>
-
-            <Tab className="text-center m-5" eventKey="curiosities" title={t("exposition.curiosities")}>
-
-            </Tab>
-        </Tabs>
-
-    );
+const theme = {
+  // Theme styling goes here
 }
 
-export function TextEditor({t}) {
-    return (
-        <></>
-    );
+export function TextEditor({ t }) {
+  const initialConfig = {
+    namespace: "MathEditor",
+    theme,
+    onError,
+  };
+
+  const [editorState, setEditorState] = useState();
+  function onChange(editorState) {
+    console.log(`Current editor state: ${JSON.stringify(editorState)}`)
+    setEditorState(editorState);
+  }
+
+  return (
+    <LexicalComposer initialConfig={initialConfig}>
+      <RichTextPlugin
+        contentEditable={<ContentEditable />}
+        placeholder={<div>{t("editor.placeholder")}</div>}
+        ErrorBoundary={LexicalErrorBoundary}
+      />
+      <HistoryPlugin />
+      <AutoFocus />
+      <OnChangePlugin onChange={onChange} />
+    </LexicalComposer>
+  );
+}
+
+// Catch any errors that occur during Lexical updates and log them
+// or throw them as needed. If you don't throw them, Lexical will
+// try to recover gracefully without losing user data.
+function onError(error) {
+  console.error(error);
+}
+
+function AutoFocus() {
+  const [editor] = useLexicalComposerContext();
+
+  useEffect(() => {
+    // Focus the editor when the effect fires!
+    editor.focus();
+  }, [editor]);
+
+  return null;
+}
+
+// When the editor changes
+function OnChangePlugin({ onChange }) {
+  // Access the editor through the LexicalComposerContext
+  const [editor] = useLexicalComposerContext();
+  // Wrap our listener in useEffect to handle the teardown and avoid stale references.
+  useEffect(() => {
+    // most listeners return a teardown function that can be called to clean them up.
+    return editor.registerUpdateListener(({ editorState }) => {
+      // call onChange here to pass the latest state up to the parent.
+      onChange(editorState);
+    });
+  }, [editor, onChange]);
+
 }
