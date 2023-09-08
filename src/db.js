@@ -27,6 +27,9 @@ export const getExpositions = async (lang) => {
 
 export const isTeacher = async () => {
     try {
+        if (app_login.currentUser == null) {
+            return false;
+        }
         return await app_login.currentUser.functions.isTeacher();
     }
     catch (error) {

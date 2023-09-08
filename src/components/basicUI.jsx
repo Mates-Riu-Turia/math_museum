@@ -3,9 +3,8 @@ import { Dropdown, Container, Navbar, Button, Nav as NavB } from "react-bootstra
 import useTheme from "../hooks/useTheme";
 
 import { AccountSelector } from "./account";
-import { isTeacher } from "../db";
 
-export function Nav({ t, changeLanguage, setShowOffcanvas }) {
+export function Nav({ t, changeLanguage, setShowOffcanvas, isTeacher }) {
     return (
         <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary z-3">
             <Container fluid>
@@ -24,7 +23,7 @@ export function Nav({ t, changeLanguage, setShowOffcanvas }) {
                 <Navbar.Toggle />
                 <Navbar.Collapse>
                     {
-                        isTeacher() && <NavB.Link href="/math_museum/add_exposition" className="ms-2">
+                        isTeacher && <NavB.Link href="/math_museum/add_exposition" className="ms-2">
                             <i className="bi bi-plus-circle me-1"></i>
                             {t("addExposition.title")}
                         </NavB.Link>

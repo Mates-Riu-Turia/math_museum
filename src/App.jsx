@@ -2,7 +2,7 @@ import { React, useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-import { getExpositions } from "./db";
+import { getExpositions, isTeacher as isTeacherDB } from "./db";
 
 import { Nav, Footer, Logo } from "./components/basicUI";
 
@@ -34,6 +34,14 @@ export default function App() {
         expositionsSync();
     }, [lang]);
 
+    // Find if the user is teacher or not
+    const [isTeacher, setIsTeacher] = useState(false);
+    useEffect(() => {
+        const teacherSync = async () => {
+            setIsTeacher(await isTeacherDB());
+        };
+        teacherSync();
+    }, []);
 
     if (expositions === null) {
         return (<></>);
@@ -48,12 +56,12 @@ export default function App() {
 
     return (
         <Router>
-            <Nav t={t} changeLanguage={changeLanguage} setShowOffcanvas={openOffcanvas} />
+            <Nav t={t} changeLanguage={changeLanguage} setShowOffcanvas={openOffcanvas} isTeacher={isTeacher} />
             <Expositions show={showOffcanvas} handleClose={closeOffcanvas} i18n={i18n} t={t} expositions={expositions} />
             <Routes>
                 <Route path="/math_museum" element={<Logo t={t} />} />
                 <Route path="/math_museum/expositions/:name" element={<Exposition expositions={expositions} t={t} />} />
-                <Route path="/math_museum/add_exposition" element={<AddExposition t={t} />} />
+                <Route path="/math_museum/add_exposition" element={<AddExposition t={t} isTeacher={isTeacher} />} />
                 <Route path="*" element={<NotFound t={t} />} />
             </Routes>
             <Footer t={t} />
