@@ -17,3 +17,7 @@
 #notFoundContainer {
     top: 35% !important;
 }
+
+.tab-content {
+    height: calc(100% - 10rem - 24px);
+}
