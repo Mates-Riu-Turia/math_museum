@@ -5,9 +5,29 @@ import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
+import { $getSelection, $isRangeSelection } from "lexical";
+import { $setBlocksType } from "@lexical/selection";
+import { $createHeadingNode, HeadingNode } from "@lexical/rich-text"
+import { Button } from 'react-bootstrap';
 
 const theme = {
     // Theme styling goes here
+}
+
+function AddHeader() {
+    const [editor] = useLexicalComposerContext();
+    const onClick = () => {
+        editor.update(() => {
+            const selection = $getSelection();
+            if ($isRangeSelection(selection)) {
+                $setBlocksType(selection, () => $createHeadingNode("h1"))
+            }
+        });
+    };
+
+    return (
+        <Button onClick={onClick}>Add H1</Button>
+    );
 }
 
 export function TextEditor({ t }) {
@@ -15,6 +35,7 @@ export function TextEditor({ t }) {
         namespace: "MathEditor",
         theme,
         onError,
+        nodes: [HeadingNode]
     };
 
     const [editorState, setEditorState] = useState();
@@ -25,8 +46,9 @@ export function TextEditor({ t }) {
 
     return (
         <LexicalComposer initialConfig={initialConfig}>
+            <AddHeader />
             <RichTextPlugin
-                contentEditable={<ContentEditable className="h-100 position-relative border rounded-5 text-start p-3" /> }
+                contentEditable={<ContentEditable className="h-100 position-relative border rounded-5 text-start p-3" />}
                 placeholder={
                     <div className="position-absolute top-50 start-50 translate-middle">{t("editor.placeholder")}</div>
                 }
