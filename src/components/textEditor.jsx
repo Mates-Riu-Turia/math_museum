@@ -30,6 +30,14 @@ function AddHeader() {
     );
 }
 
+function Toolbar({ t }) {
+    return (
+        <div className="border rounded-2 w-100 border-info mb-2">
+            <AddHeader />
+        </div>
+    );
+}
+
 export function TextEditor({ t }) {
     const initialConfig = {
         namespace: "MathEditor",
@@ -46,7 +54,7 @@ export function TextEditor({ t }) {
 
     return (
         <LexicalComposer initialConfig={initialConfig}>
-            <AddHeader />
+            <Toolbar t={t} />
             <RichTextPlugin
                 contentEditable={<ContentEditable className="h-100 position-relative border rounded-5 text-start p-3" />}
                 placeholder={
