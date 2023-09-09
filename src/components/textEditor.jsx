@@ -26,9 +26,9 @@ export function TextEditor({ t }) {
     return (
         <LexicalComposer initialConfig={initialConfig}>
             <RichTextPlugin
-                contentEditable={<ContentEditable className="h-100" />}
+                contentEditable={<ContentEditable className="h-100 position-relative border rounded-5 text-start p-3" /> }
                 placeholder={
-                    <div>{t("editor.placeholder")}</div>
+                    <div className="position-absolute top-50 start-50 translate-middle">{t("editor.placeholder")}</div>
                 }
                 ErrorBoundary={LexicalErrorBoundary}
             />
