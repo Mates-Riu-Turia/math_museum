@@ -5,7 +5,7 @@ import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
-import { $getSelection, $isRangeSelection } from "lexical";
+import { $getSelection, $isRangeSelection, UNDO_COMMAND, CAN_UNDO_COMMAND, REDO_COMMAND, CAN_REDO_COMMAND } from "lexical";
 import { $setBlocksType } from "@lexical/selection";
 import { $createHeadingNode, HeadingNode } from "@lexical/rich-text"
 import { Button } from 'react-bootstrap';
@@ -30,10 +30,46 @@ function AddHeader() {
     );
 }
 
+function History() {
+    const [editor] = useLexicalComposerContext();
+
+    const [canUndo, setCanUndo] = useState(false);
+    const [canRedo, setCanRedo] = useState(false);
+
+    useEffect(() => {
+        editor.registerCommand(CAN_UNDO_COMMAND, (payload) => {
+            setCanUndo(payload);
+            return true;
+        }, 4);
+        editor.registerCommand(CAN_REDO_COMMAND, (payload) => {
+            setCanRedo(payload);
+            return true;
+        }, 4);
+    }, []);
+
+    // Check if undo can be triggered
+
+    const undo = () => {
+        editor.dispatchCommand(UNDO_COMMAND);
+    };
+
+    const redo = () => {
+        editor.dispatchCommand(REDO_COMMAND)
+    }
+
+    return (
+        <>
+            <Button onClick={undo} disabled={!canUndo}>Undo</Button>
+            <Button onClick={redo} disabled={!canRedo}>Redo</Button>
+        </>
+    );
+}
+
 function Toolbar({ t }) {
     return (
         <div className="border rounded-2 w-100 border-info mb-2">
             <AddHeader />
+            <History />
         </div>
     );
 }
@@ -45,12 +81,6 @@ export function TextEditor({ t }) {
         onError,
         nodes: [HeadingNode]
     };
-
-    const [editorState, setEditorState] = useState();
-    function onChange(editorState) {
-        console.log(`Current editor state: ${JSON.stringify(editorState)}`)
-        setEditorState(editorState);
-    }
 
     return (
         <LexicalComposer initialConfig={initialConfig}>
@@ -64,7 +94,6 @@ export function TextEditor({ t }) {
             />
             <HistoryPlugin />
             <AutoFocus />
-            <OnChangePlugin onChange={onChange} />
         </LexicalComposer>
     );
 }
@@ -85,18 +114,4 @@ function AutoFocus() {
     }, [editor]);
 
     return null;
-}
-
-// When the editor changes
-function OnChangePlugin({ onChange }) {
-    // Access the editor through the LexicalComposerContext
-    const [editor] = useLexicalComposerContext();
-    // Wrap our listener in useEffect to handle the teardown and avoid stale references.
-    useEffect(() => {
-        // most listeners return a teardown function that can be called to clean them up.
-        return editor.registerUpdateListener(({ editorState }) => {
-            // call onChange here to pass the latest state up to the parent.
-            onChange(editorState);
-        });
-    }, [editor, onChange]);
 }
