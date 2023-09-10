@@ -9,25 +9,10 @@ import { $getSelection, $isRangeSelection, UNDO_COMMAND, CAN_UNDO_COMMAND, REDO_
 import { $setBlocksType } from "@lexical/selection";
 import { $createHeadingNode, HeadingNode } from "@lexical/rich-text"
 import { Button } from 'react-bootstrap';
+import { Toolbar } from "./textEditorToolbar"
 
 const theme = {
     // Theme styling goes here
-}
-
-function AddHeader() {
-    const [editor] = useLexicalComposerContext();
-    const onClick = () => {
-        editor.update(() => {
-            const selection = $getSelection();
-            if ($isRangeSelection(selection)) {
-                $setBlocksType(selection, () => $createHeadingNode("h1"))
-            }
-        });
-    };
-
-    return (
-        <Button onClick={onClick}>Add H1</Button>
-    );
 }
 
 function History() {
@@ -62,15 +47,6 @@ function History() {
             <Button onClick={undo} disabled={!canUndo}>Undo</Button>
             <Button onClick={redo} disabled={!canRedo}>Redo</Button>
         </>
-    );
-}
-
-function Toolbar({ t }) {
-    return (
-        <div className="border rounded-2 w-100 border-info mb-2">
-            <AddHeader />
-            <History />
-        </div>
     );
 }
 
