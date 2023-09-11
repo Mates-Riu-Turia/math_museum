@@ -5,7 +5,6 @@ import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
-import { $getSelection, $isRangeSelection, UNDO_COMMAND, CAN_UNDO_COMMAND, REDO_COMMAND, CAN_REDO_COMMAND } from "lexical";
 import { $setBlocksType } from "@lexical/selection";
 import { $createHeadingNode, HeadingNode } from "@lexical/rich-text"
 import { Button } from 'react-bootstrap';
@@ -13,41 +12,6 @@ import { Toolbar } from "./textEditorToolbar"
 
 const theme = {
     // Theme styling goes here
-}
-
-function History() {
-    const [editor] = useLexicalComposerContext();
-
-    const [canUndo, setCanUndo] = useState(false);
-    const [canRedo, setCanRedo] = useState(false);
-
-    useEffect(() => {
-        editor.registerCommand(CAN_UNDO_COMMAND, (payload) => {
-            setCanUndo(payload);
-            return true;
-        }, 4);
-        editor.registerCommand(CAN_REDO_COMMAND, (payload) => {
-            setCanRedo(payload);
-            return true;
-        }, 4);
-    }, []);
-
-    // Check if undo can be triggered
-
-    const undo = () => {
-        editor.dispatchCommand(UNDO_COMMAND);
-    };
-
-    const redo = () => {
-        editor.dispatchCommand(REDO_COMMAND)
-    }
-
-    return (
-        <>
-            <Button onClick={undo} disabled={!canUndo}>Undo</Button>
-            <Button onClick={redo} disabled={!canRedo}>Redo</Button>
-        </>
-    );
 }
 
 export function TextEditor({ t }) {
