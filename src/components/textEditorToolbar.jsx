@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import { Stack, Button, OverlayTrigger, Tooltip, ToggleButton } from "react-bootstrap";
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { UNDO_COMMAND, CAN_UNDO_COMMAND, REDO_COMMAND, CAN_REDO_COMMAND, SELECTION_CHANGE_COMMAND, COMMAND_PRIORITY_CRITICAL, FORMAT_TEXT_COMMAND } from "lexical";
-import { $getSelection, $isRangeSelection } from "lexical"
+import { UNDO_COMMAND, CAN_UNDO_COMMAND, REDO_COMMAND, CAN_REDO_COMMAND, SELECTION_CHANGE_COMMAND, COMMAND_PRIORITY_CRITICAL, FORMAT_TEXT_COMMAND, $getSelection, $isRangeSelection } from "lexical";
 
 export function Toolbar({ t }) {
     return (
@@ -74,7 +73,7 @@ function Format() {
             })
             return true;
         }, COMMAND_PRIORITY_CRITICAL)
-    }, [setIsBold]);
+    }, [editor]);
 
     const setFormat = (format) => {
         editor.dispatchCommand(FORMAT_TEXT_COMMAND, format);
@@ -110,7 +109,7 @@ function ToolbarContainer({ children }) {
 function ToolbarButton({ children, title, onClick = (() => { }), disabled = false, checked = false }) {
     return (
         <OverlayTrigger overlay={<Tooltip>{title}</Tooltip>}>
-            <span className={"d-inline-block" + disabled && "cursor-not-allowed"}>
+            <span className={"d-inline-block " + (disabled && "cursor-not-allowed")}>
                 {checked ? (<ToggleButton variant="outline-secondary m-1" onClick={onClick} disabled={disabled} checked={checked} type="radio">{children}</ToggleButton>) :
                     <Button variant="outline-secondary m-1" onClick={onClick} disabled={disabled}>{children}</Button>}
             </span>

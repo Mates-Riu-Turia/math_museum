@@ -1,17 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { LexicalComposer } from '@lexical/react/LexicalComposer';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
-import { $setBlocksType } from "@lexical/selection";
-import { $createHeadingNode, HeadingNode } from "@lexical/rich-text"
-import { Button } from 'react-bootstrap';
-import { Toolbar } from "./textEditorToolbar"
+import { HeadingNode } from "@lexical/rich-text";
+import { Toolbar } from "./textEditorToolbar";
 
 const theme = {
     // Theme styling goes here
+    text: {
+        bold: "fw-bold",
+        italic: "fst-italic",
+        underline: "text-decoration-underline"
+    }
 }
 
 export function TextEditor({ t }) {
