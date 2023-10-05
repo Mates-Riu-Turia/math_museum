@@ -1,7 +1,34 @@
 import { useState, useEffect } from "react";
 import { Stack, Button, OverlayTrigger, Tooltip, ToggleButton, Dropdown } from "react-bootstrap";
-import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { UNDO_COMMAND, CAN_UNDO_COMMAND, REDO_COMMAND, CAN_REDO_COMMAND, COMMAND_PRIORITY_CRITICAL, FORMAT_TEXT_COMMAND, FORMAT_ELEMENT_COMMAND, $getSelection, $isRangeSelection, $isElementNode } from "lexical";
+import { $patchStyleText } from "@lexical/selection"
+
+const FONT_FAMILY_OPTIONS = [
+    ["Arial", "Arial"],
+    ["Courier New", "Courier New"],
+    ["Georgia", "Georgia"],
+    ["Times New Roman", "Times New Roman"],
+    ["Trebuchet MS", "Trebuchet MS"],
+    ["Verdana", "Verdana"],
+];
+
+const FONT_SIZE_OPTIONS = [
+    ["10px", "10px"],
+    ["11px", "11px"],
+    ["12px", "12px"],
+    ["13px", "13px"],
+    ["14px", "14px"],
+    ["15px", "15px"],
+    ["16px", "16px"],
+    ["17px", "17px"],
+    ["18px", "18px"],
+    ["19px", "19px"],
+    ["20px", "20px"],
+    ["21px", "21px"],
+    ["22px", "23px"],
+    ["24px", "24px"]
+];
 
 export function Toolbar({ t }) {
     const [editor] = useLexicalComposerContext();
@@ -12,6 +39,8 @@ export function Toolbar({ t }) {
     const [isUnderline, setIsUnderline] = useState(false);
     const [canUndo, setCanUndo] = useState(false);
     const [canRedo, setCanRedo] = useState(false);
+    const [fontFamily, setFontFamily] = useState("Arial");
+    const [fontSize, setFontSize] = useState("16px");
 
     const updateToolbar = () => {
         const selection = $getSelection();
@@ -48,8 +77,13 @@ export function Toolbar({ t }) {
     }, [editor, updateToolbar, setIsBold, setIsItalic, setIsUnderline]);
 
     return (
-        <Stack direction="horizontal" className="border rounded-2 w-100 border-primary mb-2">
+        <Stack direction="horizontal" className="border rounded-2 border-primary mb-2">
             <History t={t} editor={editor} canUndo={canUndo} canRedo={canRedo} />
+            <ToolbarContainer>
+                <FontFormat t={t} editor={editor} style="font-family" value={fontFamily} set={setFontFamily} />
+                <span className="ms-1 me-1"></span>
+                <FontFormat t={t} editor={editor} style="font-size" value={fontSize} set={setFontSize} />
+            </ToolbarContainer>
             <Format t={t} editor={editor} isBold={isBold} isItalic={isItalic} isUnderline={isUnderline} />
             <Alignement t={t} editor={editor} elementFormat={elementFormat} />
         </Stack>
@@ -137,12 +171,47 @@ function Alignement({ t, editor, elementFormat }) {
     );
 }
 
+function FontFormat({ t, editor, style, value, set }) {
+    const setFormat = (option) => {
+        editor.update(() => {
+            const selection = $getSelection();
+
+            if ($isRangeSelection(selection)) {
+                set(option);
+                $patchStyleText(selection, {
+                    [style]: option
+                })
+            }
+        })
+    }
+
+    return (
+        <Dropdown>
+            <Dropdown.Toggle variant="outline-secondary">
+                {value}
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+                {
+                    (style == "font-size" ? FONT_SIZE_OPTIONS : FONT_FAMILY_OPTIONS).map((option) => {
+                        return (
+                            <Dropdown.Item onClick={() => setFormat(option[0])}>
+                                {option[1]}
+                            </Dropdown.Item>
+                        );
+                    })
+                }
+            </Dropdown.Menu>
+        </Dropdown>
+    );
+}
+
 function ToolbarContainer({ children }) {
     return (
         <>
-            <div className="ms-2 me-2">
+            <Stack direction="horizontal" className="ms-2 me-2">
                 {children}
-            </div>
+            </Stack>
             <div className="vr"></div>
         </>
     );
