@@ -25,3 +25,37 @@
 .cursor-not-allowed {
     cursor: not-allowed !important;
 }
+
+.editor-listContainer {
+    padding: 0;
+    margin: 0;
+    list-style-position: inside;
+}
+
+.editor-ol2 {
+    list-style-type: upper-alpha;
+}
+
+.editor-ol3 {
+    list-style-type: lower-alpha;
+}
+
+.editor-ol4 {
+    list-style-type: upper-roman;
+}
+
+.editor-ol5 {
+    list-style-type: lower-roman;
+}
+
+.editor-listItem {
+    margin: 0 20px;
+}
+
+.editor-nestedListItem {
+    list-style-type: none;
+}
+
+.editor-nestedListItem:before .editor-nestedListItem:after {
+    display: none;
+}

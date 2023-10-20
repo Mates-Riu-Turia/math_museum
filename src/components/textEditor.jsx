@@ -7,6 +7,10 @@ import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import { HeadingNode } from "@lexical/rich-text";
 import { Toolbar } from "./textEditorToolbar";
+import { ListPlugin } from "@lexical/react/LexicalListPlugin";
+import { ListNode, ListItemNode } from "@lexical/list";
+import { TabIndentationPlugin } from "@lexical/react/LexicalTabIndentationPlugin";
+import ListMaxIndentLevelPlugin from "./ListIndent"
 
 const theme = {
     // Theme styling goes here
@@ -14,7 +18,21 @@ const theme = {
         bold: "fw-bold",
         italic: "fst-italic",
         underline: "text-decoration-underline"
-    }
+    },
+    list: {
+        listitem: "editor-listItem",
+        nested: {
+            listitem: "editor-nestedListItem",
+        },
+        olDepth: [
+            "editor-listContainer",
+            "editor-listContainer editor-ol2",
+            "editor-listContainer editor-ol3",
+            "editor-listContainer editor-ol4",
+            "editor-listContainer editor-ol5",
+        ],
+        ul: "editor-listContainer",
+    },
 }
 
 export function TextEditor({ t }) {
@@ -22,7 +40,7 @@ export function TextEditor({ t }) {
         namespace: "MathEditor",
         theme,
         onError,
-        nodes: [HeadingNode]
+        nodes: [HeadingNode, ListNode, ListItemNode]
     };
 
     return (
@@ -37,6 +55,9 @@ export function TextEditor({ t }) {
             />
             <HistoryPlugin />
             <AutoFocus />
+            <ListPlugin />
+            <TabIndentationPlugin />
+            <ListMaxIndentLevelPlugin maxDepth={5} />
         </LexicalComposer>
     );
 }

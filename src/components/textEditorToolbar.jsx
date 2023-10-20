@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import { Stack, Button, OverlayTrigger, Tooltip, ToggleButton, Dropdown } from "react-bootstrap";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
-import { UNDO_COMMAND, CAN_UNDO_COMMAND, REDO_COMMAND, CAN_REDO_COMMAND, COMMAND_PRIORITY_CRITICAL, FORMAT_TEXT_COMMAND, FORMAT_ELEMENT_COMMAND, $getSelection, $isRangeSelection, $isElementNode } from "lexical";
-import { $patchStyleText } from "@lexical/selection"
+import { UNDO_COMMAND, CAN_UNDO_COMMAND, REDO_COMMAND, CAN_REDO_COMMAND, COMMAND_PRIORITY_CRITICAL, FORMAT_TEXT_COMMAND, FORMAT_ELEMENT_COMMAND, $getSelection, $isRangeSelection, $isElementNode, $isRootOrShadowRoot } from "lexical";
+import { $patchStyleText, $setBlocksType } from "@lexical/selection";
+import { $createHeadingNode, $isHeadingNode } from "@lexical/rich-text";
+import { $isListNode, INSERT_UNORDERED_LIST_COMMAND, INSERT_ORDERED_LIST_COMMAND, REMOVE_LIST_COMMAND } from "@lexical/list";
+import { $findMatchingParent } from "@lexical/utils";
 
 const FONT_FAMILY_OPTIONS = [
     ["Arial", "Arial"],
@@ -41,6 +44,7 @@ export function Toolbar({ t }) {
     const [canRedo, setCanRedo] = useState(false);
     const [fontFamily, setFontFamily] = useState("Arial");
     const [fontSize, setFontSize] = useState("16px");
+    const [blockType, setBlockType] = useState("paragraph");
 
     const updateToolbar = () => {
         const selection = $getSelection();
@@ -48,6 +52,12 @@ export function Toolbar({ t }) {
         if ($isRangeSelection(selection)) {
             const node = selection.anchor.getNode();
             const parent = node.getParent();
+            const element = node.getKey() === 'root'
+                ? node
+                : $findMatchingParent(node, (e) => {
+                    const parent = e.getParent();
+                    return parent !== null && $isRootOrShadowRoot(parent);
+                });
 
             const format = $isElementNode(node) ? node.getFormatType() : parent.getFormatType();
 
@@ -56,6 +66,16 @@ export function Toolbar({ t }) {
             setIsBold(selection.hasFormat("bold"));
             setIsItalic(selection.hasFormat("italic"));
             setIsUnderline(selection.hasFormat("underline"));
+
+            if ($isHeadingNode(element)) {
+                setBlockType(element.getTag());
+            }
+            else if ($isListNode(element)) {
+                setBlockType(element.getListType());
+            }
+            else {
+                setBlockType("paragraph");
+            }
         }
     };
 
@@ -74,7 +94,7 @@ export function Toolbar({ t }) {
             }, COMMAND_PRIORITY_CRITICAL);
         });
 
-    }, [editor, updateToolbar, setIsBold, setIsItalic, setIsUnderline]);
+    }, [editor, updateToolbar, setIsBold, setIsItalic, setIsUnderline, setBlockType]);
 
     return (
         <Stack direction="horizontal" className="border rounded-2 border-primary mb-2">
@@ -86,6 +106,7 @@ export function Toolbar({ t }) {
             </ToolbarContainer>
             <Format t={t} editor={editor} isBold={isBold} isItalic={isItalic} isUnderline={isUnderline} />
             <Alignement t={t} editor={editor} elementFormat={elementFormat} />
+            <ParagraphFormat editor={editor} blockType={blockType} />
         </Stack>
     );
 }
@@ -203,6 +224,55 @@ function FontFormat({ t, editor, style, value, set }) {
                 }
             </Dropdown.Menu>
         </Dropdown>
+    );
+}
+
+function ParagraphFormat({ editor, blockType }) {
+    const setParagraph = (blockFunction) => {
+        editor.update(() => {
+            const selection = $getSelection();
+
+            if ($isRangeSelection(selection)) {
+                $setBlocksType(selection, blockFunction);
+            }
+        })
+    }
+
+    const list = (listType) => {
+        editor.update(() => {
+            const selection = $getSelection();
+
+            if ($isRangeSelection(selection)) {
+                if (blockType === listType) {
+                    editor.dispatchCommand(REMOVE_LIST_COMMAND);
+                }
+                else if (listType === "bullet") {
+                    editor.dispatchCommand(INSERT_UNORDERED_LIST_COMMAND);
+                }
+                else {
+                    editor.dispatchCommand(INSERT_ORDERED_LIST_COMMAND);
+                }
+            }
+        })
+    }
+
+    return (
+        <ToolbarContainer>
+            <Dropdown>
+                <Dropdown.Toggle>
+                    Foo
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                    <Dropdown.Item onClick={() => { }}>Paragraph</Dropdown.Item>
+                    <Dropdown.Item onClick={() => setParagraph(() => $createHeadingNode("h1"))}>Heading 1</Dropdown.Item>
+                    <Dropdown.Item onClick={() => setParagraph(() => $createHeadingNode("h2"))}>Heading 2</Dropdown.Item>
+                    <Dropdown.Item onClick={() => setParagraph(() => $createHeadingNode("h3"))}>Heading 3</Dropdown.Item>
+                    <Dropdown.Item onClick={() => list("bullet")}>Unordered List</Dropdown.Item>
+                    <Dropdown.Item onClick={() => list("number")}>Ordered List</Dropdown.Item>
+                </Dropdown.Menu>
+            </Dropdown>
+        </ToolbarContainer>
     );
 }
 
