@@ -3,7 +3,7 @@ import { Stack, Button, OverlayTrigger, Tooltip, ToggleButton, Dropdown } from "
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { UNDO_COMMAND, CAN_UNDO_COMMAND, REDO_COMMAND, CAN_REDO_COMMAND, COMMAND_PRIORITY_CRITICAL, FORMAT_TEXT_COMMAND, FORMAT_ELEMENT_COMMAND, $getSelection, $isRangeSelection, $isElementNode, $isRootOrShadowRoot } from "lexical";
 import { $patchStyleText, $setBlocksType } from "@lexical/selection";
-import { $createHeadingNode, $isHeadingNode } from "@lexical/rich-text";
+import { $createHeadingNode, $isHeadingNode, $createParagraphNode } from "@lexical/rich-text";
 import { $isListNode, INSERT_UNORDERED_LIST_COMMAND, INSERT_ORDERED_LIST_COMMAND, REMOVE_LIST_COMMAND } from "@lexical/list";
 import { $findMatchingParent } from "@lexical/utils";
 
@@ -106,7 +106,7 @@ export function Toolbar({ t }) {
             </ToolbarContainer>
             <Format t={t} editor={editor} isBold={isBold} isItalic={isItalic} isUnderline={isUnderline} />
             <Alignement t={t} editor={editor} elementFormat={elementFormat} />
-            <ParagraphFormat editor={editor} blockType={blockType} />
+            <ParagraphFormat t={t} editor={editor} blockType={blockType} />
         </Stack>
     );
 }
@@ -227,7 +227,7 @@ function FontFormat({ t, editor, style, value, set }) {
     );
 }
 
-function ParagraphFormat({ editor, blockType }) {
+function ParagraphFormat({ t, editor, blockType }) {
     const setParagraph = (blockFunction) => {
         editor.update(() => {
             const selection = $getSelection();
@@ -260,11 +260,11 @@ function ParagraphFormat({ editor, blockType }) {
         <ToolbarContainer>
             <Dropdown>
                 <Dropdown.Toggle>
-                    Foo
+                    {t("editor.blockType." + blockType)}
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                    <Dropdown.Item onClick={() => { }}>Paragraph</Dropdown.Item>
+                    <Dropdown.Item onClick={() => setParagraph(() => { $createParagraphNode() })}>Paragraph</Dropdown.Item>
                     <Dropdown.Item onClick={() => setParagraph(() => $createHeadingNode("h1"))}>Heading 1</Dropdown.Item>
                     <Dropdown.Item onClick={() => setParagraph(() => $createHeadingNode("h2"))}>Heading 2</Dropdown.Item>
                     <Dropdown.Item onClick={() => setParagraph(() => $createHeadingNode("h3"))}>Heading 3</Dropdown.Item>
