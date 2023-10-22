@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Form, Alert, Button, Row, Col, FloatingLabel, Container, Modal, Tabs, Tab } from "react-bootstrap";
-import { TextEditor } from "./textEditor"
+import { TextEditor } from "./editor/textEditor"
 
 export function AddExposition({ t, isTeacher }) {
     if (isTeacher) {
