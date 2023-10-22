@@ -3,7 +3,7 @@ import { Stack, Button, OverlayTrigger, Tooltip, ToggleButton, Dropdown } from "
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { UNDO_COMMAND, CAN_UNDO_COMMAND, REDO_COMMAND, CAN_REDO_COMMAND, COMMAND_PRIORITY_CRITICAL, FORMAT_TEXT_COMMAND, FORMAT_ELEMENT_COMMAND, $getSelection, $isRangeSelection, $isElementNode, $isRootOrShadowRoot } from "lexical";
 import { $patchStyleText, $setBlocksType } from "@lexical/selection";
-import { $createHeadingNode, $isHeadingNode, $createParagraphNode } from "@lexical/rich-text";
+import { $createHeadingNode, $isHeadingNode, $createParagraphNode, $createQuoteNode, $isQuoteNode } from "@lexical/rich-text";
 import { $isListNode, INSERT_UNORDERED_LIST_COMMAND, INSERT_ORDERED_LIST_COMMAND, REMOVE_LIST_COMMAND } from "@lexical/list";
 import { $findMatchingParent } from "@lexical/utils";
 
@@ -72,6 +72,9 @@ export function Toolbar({ t }) {
             }
             else if ($isListNode(element)) {
                 setBlockType(element.getListType());
+            }
+            else if ($isQuoteNode(element)) {
+                setBlockType("quote");
             }
             else {
                 setBlockType("paragraph");
@@ -270,6 +273,7 @@ function ParagraphFormat({ t, editor, blockType }) {
                     <Dropdown.Item onClick={() => setParagraph(() => $createHeadingNode("h3"))}>Heading 3</Dropdown.Item>
                     <Dropdown.Item onClick={() => list("bullet")}>Unordered List</Dropdown.Item>
                     <Dropdown.Item onClick={() => list("number")}>Ordered List</Dropdown.Item>
+                    <Dropdown.Item onClick={() => setParagraph(() => $createQuoteNode())}>Quote</Dropdown.Item>
                 </Dropdown.Menu>
             </Dropdown>
         </ToolbarContainer>

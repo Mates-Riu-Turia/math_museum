@@ -5,7 +5,7 @@ import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
-import { HeadingNode } from "@lexical/rich-text";
+import { HeadingNode, QuoteNode } from "@lexical/rich-text";
 import { Toolbar } from "./textEditorToolbar";
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 import { ListNode, ListItemNode } from "@lexical/list";
@@ -14,10 +14,11 @@ import ListMaxIndentLevelPlugin from "./ListIndent"
 
 const theme = {
     // Theme styling goes here
+    quote: "editor-quote",
     text: {
         bold: "fw-bold",
         italic: "fst-italic",
-        underline: "text-decoration-underline"
+        underline: "text-decoration-underline",
     },
     list: {
         listitem: "editor-listItem",
@@ -40,7 +41,7 @@ export function TextEditor({ t }) {
         namespace: "MathEditor",
         theme,
         onError,
-        nodes: [HeadingNode, ListNode, ListItemNode]
+        nodes: [HeadingNode, ListNode, ListItemNode, QuoteNode]
     };
 
     return (

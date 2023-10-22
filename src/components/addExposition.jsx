@@ -19,10 +19,10 @@ export function AddExposition({ t, isTeacher }) {
 
                 <h1>{t("addExposition.title")}</h1>
 
-                <Alert variant="info">
+                <div className="editor-quote">
                     <i className="bi bi-info-circle-fill"></i>
                     {t("addExposition.help")}
-                </Alert>
+                </div>
 
                 <Form noValidate validated={validated} onSubmit={handleSubmit}>
                     <Container fluid>

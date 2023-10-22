@@ -59,3 +59,12 @@
 .editor-nestedListItem:before .editor-nestedListItem:after {
     display: none;
 }
+
+.editor-quote {
+    padding: 1.25rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    color: var(--bs-info-text-emphasis, inherit);
+    background-color: var(--bs-info-bg-subtle);
+    border-left: 0.25rem solid var(--bs-info-border-subtle, var(--bs-gray-300));
+}
