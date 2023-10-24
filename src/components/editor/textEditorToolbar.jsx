@@ -6,6 +6,8 @@ import { $patchStyleText, $setBlocksType } from "@lexical/selection";
 import { $createHeadingNode, $isHeadingNode, $createParagraphNode, $createQuoteNode, $isQuoteNode } from "@lexical/rich-text";
 import { $isListNode, INSERT_UNORDERED_LIST_COMMAND, INSERT_ORDERED_LIST_COMMAND, REMOVE_LIST_COMMAND } from "@lexical/list";
 import { $findMatchingParent } from "@lexical/utils";
+import { TOGGLE_LINK_COMMAND } from "@lexical/link";
+import { sanitizeUrl } from "./Link";
 
 const FONT_FAMILY_OPTIONS = [
     ["Arial", "Arial"],
@@ -110,6 +112,7 @@ export function Toolbar({ t }) {
             <Format t={t} editor={editor} isBold={isBold} isItalic={isItalic} isUnderline={isUnderline} />
             <Alignement t={t} editor={editor} elementFormat={elementFormat} />
             <ParagraphFormat t={t} editor={editor} blockType={blockType} />
+            <ToolbarButton onClick={() => editor.dispatchCommand(TOGGLE_LINK_COMMAND, sanitizeUrl("https://google.com"))}>Link</ToolbarButton>
         </Stack>
     );
 }

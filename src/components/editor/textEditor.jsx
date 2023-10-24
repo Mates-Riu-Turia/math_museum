@@ -10,7 +10,11 @@ import { Toolbar } from "./textEditorToolbar";
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 import { ListNode, ListItemNode } from "@lexical/list";
 import { TabIndentationPlugin } from "@lexical/react/LexicalTabIndentationPlugin";
-import ListMaxIndentLevelPlugin from "./ListIndent"
+import ListMaxIndentLevelPlugin from "./ListIndent";
+import AutoLinkPlugin from "./AutoLink";
+import LexicalClickableLinkPlugin from '@lexical/react/LexicalClickableLinkPlugin';
+import LinkPlugin from './Link';
+import { LinkNode, AutoLinkNode } from "@lexical/link";
 
 const theme = {
     // Theme styling goes here
@@ -41,7 +45,7 @@ export function TextEditor({ t }) {
         namespace: "MathEditor",
         theme,
         onError,
-        nodes: [HeadingNode, ListNode, ListItemNode, QuoteNode]
+        nodes: [HeadingNode, ListNode, ListItemNode, QuoteNode, LinkNode, AutoLinkNode]
     };
 
     return (
@@ -59,6 +63,9 @@ export function TextEditor({ t }) {
             <ListPlugin />
             <TabIndentationPlugin />
             <ListMaxIndentLevelPlugin maxDepth={5} />
+            <AutoLinkPlugin />
+            <LexicalClickableLinkPlugin />
+            <LinkPlugin />
         </LexicalComposer>
     );
 }
